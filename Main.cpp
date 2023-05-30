@@ -1,5 +1,8 @@
-#include <SDL.h>
-#include <iostream>
+#include<SDL.h>
+#include<SDL_image.h>
+#include<string>
+#include<iostream>
+using namespace std;
 
 // Game class as a Singleton
 class Game
@@ -9,6 +12,22 @@ private:
     SDL_Window* window;
     SDL_Renderer* renderer;
     bool isRunning;
+
+    int x1 = 0;
+    int x2 = 100;
+    int y1 = 0;
+    int y2 = 100;
+    int w1 = 800;
+    int w2 = 50;
+    int h1 = 600;
+    int h2 = 50;
+
+    int x3 = 300;
+    int y3 = 300;
+    int w3 = 200;
+    int h3 = 200;
+
+    int ms = 0;
 
     // Game states
     enum class GameState
@@ -125,16 +144,24 @@ public:
         switch (key)
         {
         case SDLK_w:
-            // Move the white square up
+        {
+            y2 -= 5;
+        }
             break;
         case SDLK_a:
-            // Move the white square left
+        {
+            x2 -= 5;
+        }
             break;
         case SDLK_s:
-            // Move the white square down
+        {
+            y2 += 5;
+        }
             break;
         case SDLK_d:
-            // Move the white square right
+        {
+            x2 += 5;
+        }
             break;
         case SDLK_p:
             currentState = GameState::Pause;
@@ -142,15 +169,10 @@ public:
         case SDLK_ESCAPE:
             currentState = GameState::Game;
             break;
-        case SDLK_1:
-            currentState = GameState::Win;
-            break;
-        case SDLK_2:
-            currentState = GameState::Lose;
-            break;
         }
     }
 
+    
     // Update game state
     void update()
     {
@@ -186,11 +208,34 @@ public:
             // Update Game Screen logic
         {
             SDL_RenderClear(renderer);
+            //game background
             SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+            SDL_Rect backgroundRect = { x1,y1,w1,h1 };
+            SDL_RenderFillRect(renderer, &backgroundRect);
+            //player (white square)
+            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+            SDL_Rect squareRect = { x2,y2,w2,h2 };
+            SDL_RenderFillRect(renderer, &squareRect);
+            //obstacle
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            SDL_Rect square2Rect = { x3,y3,w3,h3 };
+            SDL_RenderFillRect(renderer, &square2Rect);
             SDL_RenderPresent(renderer);
+
+            ms++;
+
+            if (x2 < x3 + w3 &&
+                x2 + w2 > x3 &&
+                y2 < y3 + h3 &&
+                y2 + h2 > y3)
+            {
+                currentState = GameState::Lose;
+            }
+            if (ms == 6666 )
+            {
+                currentState = GameState::Win;
+            }
         }
-            // Check collision with another object
-            // Check survival time for win condition
             break;
         case GameState::Pause:
         {
@@ -234,6 +279,8 @@ public:
         SDL_Quit();
     }
 };
+
+
 
 Game* Game::instance = nullptr;
 
