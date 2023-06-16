@@ -6,6 +6,9 @@
 #include<iostream>
 using namespace std;
 
+const int ScreenWidth = 800;
+const int ScreenHeight = 800;
+
 // Game class as a Singleton
 class Game
 {
