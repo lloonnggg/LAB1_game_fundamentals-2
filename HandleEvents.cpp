@@ -60,19 +60,9 @@ void Game::handleGameInput(SDL_Keycode key)
 {
     switch (key)
     {
-    case SDLK_w:
-    {
-        y1 -= 5;
-    }
-    break;
     case SDLK_a:
     {
         x1 -= 5;
-    }
-    break;
-    case SDLK_s:
-    {
-        y1 += 5;
     }
     break;
     case SDLK_d:

@@ -51,8 +51,8 @@ void Game::cleanup()
 
 void Game::run()
 {
-    x1 = 50;
-    y1 = 50;
+    x1 = 0;
+    y1 = 400;
     x2 = 300;
     y2 = 300;
     w1 = 50;
