@@ -37,8 +37,6 @@ private:
     int w1, w2, h1, h2;
     int ms;
 
-    string Dev = "./Assets/Developer.jpg";
-
     SDL_Texture* titleScreenImage = NULL;
     SDL_Texture* mainMenuBackground = NULL;
     SDL_Texture* gameNameImage = NULL;
@@ -54,9 +52,10 @@ private:
     SDL_Texture* winText = NULL;
     SDL_Texture* loseText = NULL;
 
-    Game();
 
 public:
+    Game();
+
     static Game* getInstance();
     bool initialize();
 

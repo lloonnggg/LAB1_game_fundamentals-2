@@ -10,7 +10,7 @@ void Game::update()
         {
             SDL_RenderClear(renderer);
             // Render title screen image
-            titleScreenImage = loadImage(Dev.c_str());
+            titleScreenImage = loadImage("./Assets/Developer.jpg");
             if (titleScreenImage != nullptr)
                 SDL_RenderCopy(renderer, titleScreenImage, nullptr, nullptr);
             SDL_RenderPresent(renderer);
@@ -70,7 +70,6 @@ void Game::update()
     }
     break;
     case GameState::Game:
-        // Update Game Screen logic
     {
         SDL_RenderClear(renderer);
         // Render game background image
